@@ -30,6 +30,7 @@
         "install -Dm644 images/tickr-rss-icon.png /app/share/tickr/pixmaps/tickr-rss-icon.png",
         "install -Dm644 images/tickr-icon.png /app/share/icons/hicolor/64x64/apps/tickr.png",
         "install -Dm644 TODO /app/share/doc/tickr/TODO",
+        "install -Dm644 README /app/share/doc/tickr/README",
         "install -Dm644 tickr.1 /app/share/man/man1/tickr.1",
         "install -Dm750 src/tickr/tickr /app/bin/tickr"
       ],
