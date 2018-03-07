@@ -1,0 +1,46 @@
+{
+  "app-id" : "com.tickr.Tickr",
+  "runtime" : "org.gnome.Platform",
+  "runtime-version" : "3.26",
+  "sdk" : "org.gnome.Sdk",
+  "command" : "tickr",
+  "rename-icon": "tickr",
+  "finish-args" : [
+    "--share=ipc",
+    "--socket=x11",
+    "--share=network",
+    "--filesystem=host",
+    "--filesystem=~/.tickr"
+  ],
+  "modules" : [
+    {
+      "name" : "tickr",
+      "buildsystem" : "simple",
+      "build-commands" : [
+        "./configure",
+        "sed -i 's@usr/share@app/share@g' src/tickr/tickr.h",
+        "sed -i 's@firefox@xdg-open@g' src/tickr/tickr.h",
+        "make",
+        "install -Dm644 tickr.desktop /app/share/applications/com.tickr.Tickr.desktop",
+        "sed -i 's@/usr/bin/tickr@tickr @g' /app/share/applications/com.tickr.Tickr.desktop",
+        "install -Dm644 tickr-url-list /app/share/tickr/tickr-url-list",
+        "install -Dm644 images/tickr-icon.png /app/share/tickr/pixmaps/tickr-icon.png",
+        "install -Dm644 images/tickr-logo.png /app/share/tickr/pixmaps/tickr-logo.png",
+        "install -Dm644 images/tickr-icon.xpm /app/share/tickr/pixmaps/tickr-icon.xpm",
+        "install -Dm644 images/tickr-rss-icon.png /app/share/tickr/pixmaps/tickr-rss-icon.png",
+        "install -Dm644 images/tickr-icon.png /app/share/icons/hicolor/64x64/apps/tickr.png",
+        "install -Dm644 TODO /app/share/doc/tickr/TODO",
+        "install -Dm644 tickr.1 /app/share/man/man1/tickr.1",
+        "install -Dm750 src/tickr/tickr /app/bin/tickr"
+      ],
+      "cleanup" : [ "/lib" ],
+      "sources" : [
+        {
+          "type" : "archive",
+          "url" : "http://www.open-tickr.net/src/tickr-0.6.4.tar.gz",
+          "sha256" : "8476fa8f539487c37617855b8312dbfaec322fe51fa5d9e9abe8c093caad75bd"
+        }
+      ]
+    }
+  ]
+}
